@@ -5,7 +5,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import autorepairpark.MainParkWindow;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -42,7 +46,7 @@ public class Login implements ActionListener{
 
 		field.setForeground(new Color(0x123456));
 		field.setFont(new Font("Consolas", Font.BOLD, 14));
-		field.setOpaque(false);
+		field.setBorder(null);
 		
 		return field;
 	}
@@ -52,7 +56,7 @@ public class Login implements ActionListener{
 
 		field.setForeground(new Color(0x123456));
 		field.setFont(new Font("Consolas", Font.BOLD, 14));
-		field.setOpaque(false);
+		field.setBorder(null);
 		
 		return field;
 	}
@@ -64,6 +68,7 @@ public class Login implements ActionListener{
 		button.setFont(new Font("Consolas", Font.PLAIN, 15));
 		button.setBackground(new Color(214, 183, 148));
 		button.setForeground(new Color(0x123456));
+		button.setBorder(null);
 
 		return button;
 	}
@@ -137,7 +142,17 @@ public class Login implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == submitButton) {
-			System.out.print("\n\nHello " + field_username.getText());
+			String username = field_username.getText();
+			String password = new String(field_password.getPassword());
+
+			if(username.equals("auto") && password.equals("password")) {
+				frame.dispose();
+				new MainParkWindow();
+			} 
+			else {
+				JOptionPane.showMessageDialog(loginPanel, "Authentication Failed!!", "Authentication", JOptionPane.OK_OPTION);
+			}
+			
 		}
 	}
 }
